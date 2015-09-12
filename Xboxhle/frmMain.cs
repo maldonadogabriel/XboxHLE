@@ -1,4 +1,4 @@
-// © copyright 2015  Gabriel Maldonado.  All Rights Reserved.
+// © Copyright 2015  Gabriel Maldonado.  All Rights Reserved.
 // Linkedin: https://www.linkedin.com/pub/gabriel-maldonado/63/457/866
 
 using System;
