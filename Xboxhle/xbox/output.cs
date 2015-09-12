@@ -1,4 +1,8 @@
-﻿using System;
+﻿// © copyright 2016  Gabriel Maldonado.  All Rights Reserved.
+// Author: Gabriel Maldonado
+// Linkedin: https://www.linkedin.com/pub/gabriel-maldonado/63/457/866
+
+using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
