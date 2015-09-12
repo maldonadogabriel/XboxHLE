@@ -43,7 +43,8 @@ namespace xboxhle
         }
 
 
-        public static int nonxdk_bgrflood_demo() {
+        public static int nonxdk_bgrflood_demo() 
+        {
             op2 = ((xboxhle.xbe.mem[reg32_pc + 3] << 8) | (xboxhle.xbe.mem[reg32_pc + 2] << 0));
             op1 = ((xboxhle.xbe.mem[reg32_pc + 1] << 8) | (xboxhle.xbe.mem[reg32_pc + 0] << 0));
 
@@ -153,7 +154,6 @@ namespace xboxhle
 
         public static int nonxdk_drawPixel_demo()
         {
-
             op2 = ((xboxhle.xbe.mem[reg32_pc + 3] << 8) | (xboxhle.xbe.mem[reg32_pc + 2] >> 0));
             op1 = ((xboxhle.xbe.mem[reg32_pc + 1] << 8) | (xboxhle.xbe.mem[reg32_pc + 0] >> 0));
 
