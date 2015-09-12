@@ -21,7 +21,6 @@ namespace xboxhle
         public static Int32[] dword = new Int32[0x00FFFFFF];
 
         public static UInt32[] framebuffer = new UInt32[0x00FFFFFF];
-        //https://retdec.com/decompilation-run/
 
         public static byte reg8_ah, reg8_al, reg8_bh, reg8_bl, reg8_ch, reg8_cl, reg8_dh, reg8_dl;
         public static Int16 reg16_ax, reg16_bx, reg16_cx, reg16_dx;
