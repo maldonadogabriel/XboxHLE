@@ -1,9 +1,0 @@
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\bin\Debug\xboxlle.exe.config
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\obj\Debug\xboxlle.exe
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\obj\Debug\xboxlle.pdb
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\bin\Debug\xboxlle.exe
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\bin\Debug\xboxlle.pdb
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\obj\Debug\xboxlle.csprojResolveAssemblyReference.cache
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\obj\Debug\xboxlle.Properties.Resources.resources
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\obj\Debug\xboxlle.csproj.GenerateResource.Cache
-C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\xboxlle\xboxlle\bin\Debug\xboxhle.exe.config
