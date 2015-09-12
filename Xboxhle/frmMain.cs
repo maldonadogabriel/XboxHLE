@@ -98,18 +98,20 @@ namespace xboxhle
             {
                 if (!(bw.CancellationPending == true))
                 {
-                    // Interpret and report instructions that are Executed.
+                    // Interpret and report instructions that are executed.
                     int OpCode = xboxhle.i386.x86();
+                    
+                    // Report executed instructions to the applications' profiler.
                     //bw.ReportProgress(OpCode);
 
                     // Cancel thread if emuIsRunning = False
                     if (emuIsRunning == false) bw.CancelAsync();
 
-                    // Invalidate form per-cycle.
+                    // Invalidate form once per-cycle.
                     this.Invalidate();
 
-                    // Delay Timer
-                    System.Threading.Thread.Sleep(0);
+                    // Delay Thread for 100 miliseconds
+                    System.Threading.Thread.Sleep(100);
                 }
                 else {
                     e.Cancel = true;
