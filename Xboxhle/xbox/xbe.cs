@@ -114,24 +114,8 @@ namespace xboxhle
             return Result;
         }
         public static void FetchAllowedMedia(uint t_offset) 
-        {
-
-//#define XBEIMAGE_MEDIA_TYPE_HARD_DISK           0x00000001
-//#define XBEIMAGE_MEDIA_TYPE_DVD_X2              0x00000002
-//#define XBEIMAGE_MEDIA_TYPE_DVD_CD              0x00000004
-//#define XBEIMAGE_MEDIA_TYPE_CD                  0x00000008
-//#define XBEIMAGE_MEDIA_TYPE_DVD_5_RO            0x00000010
-//#define XBEIMAGE_MEDIA_TYPE_DVD_9_RO            0x00000020
-//#define XBEIMAGE_MEDIA_TYPE_DVD_5_RW            0x00000040
-//#define XBEIMAGE_MEDIA_TYPE_DVD_9_RW            0x00000080
-//#define XBEIMAGE_MEDIA_TYPE_DONGLE              0x00000100
-//#define XBEIMAGE_MEDIA_TYPE_MEDIA_BOARD         0x00000200
-//#define XBEIMAGE_MEDIA_TYPE_NONSECURE_HARD_DISK 0x40000000
-//#define XBEIMAGE_MEDIA_TYPE_NONSECURE_MODE      0x80000000
-//#define XBEIMAGE_MEDIA_TYPE_MEDIA_MASK          0x00FFFFFF
-
+        
             RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
-
 
             switch (t_offset)
             {
