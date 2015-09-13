@@ -113,8 +113,9 @@ namespace xboxhle
             if (!(Convert.ToInt32(Addr, 16) == 0)) Result = Convert.ToInt32(Addr, 16) ^ Convert.ToInt32(Base, 16);
             return Result;
         }
-        public static void FetchAllowedMedia(uint t_offset) 
-        
+
+        public static void FetchAllowedMedia(uint t_offset)
+        {
             RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
 
             switch (t_offset)
