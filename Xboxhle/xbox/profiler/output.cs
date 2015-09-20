@@ -236,7 +236,7 @@ namespace xboxhle
                 case 0xFF:
                     if ((((eip & 0x0000FF00) >> 8)) == 0x15)
                     {
-                        print(pc, eip, "call [" + xboxhle.table.kernel_Thunk_table(xboxhle.xbox.i386.parse.seg16.ds) + "]");
+                        print(pc, eip, "call [" + xboxhle.xbox.profiler.table.kernel_Thunk_table(xboxhle.xbox.i386.parse.seg16.ds) + "]");
                     }
                     else if ((((eip & 0x0000FF00) >> 8)) == 0x35)
                     {

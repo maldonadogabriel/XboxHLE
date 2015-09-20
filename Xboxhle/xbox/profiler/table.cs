@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 using System;
 using System.Text;
 
-namespace xboxhle
+namespace xboxhle.xbox.profiler
 {
     public class table
     {

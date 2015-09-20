@@ -174,7 +174,7 @@ namespace xboxhle.xbox.i386
                         seg16.ds = xboxhle.xbe.mem[((addr32.eip & 0xFFFF0000) >> 16)];
                         arr[ePtr.esp].dword = (UInt32)seg16.ds;
                         ePtr.esp = ePtr.esp + 1;
-                        xboxhle.table.kernel_Thunk_table(seg16.ds);
+                        xboxhle.xbox.profiler.table.kernel_Thunk_table(seg16.ds);
                         addr32.pc += 6;
                     }
                     break;
