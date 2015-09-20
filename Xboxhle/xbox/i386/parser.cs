@@ -238,7 +238,6 @@ namespace xboxhle.xbox.i386
                     }
                     else if (((addr32.eip & 0x0000FF00) >> 8) == 0x4D) // mov ecx, [ebp+Ch]
                     {
-
                         temp.offset = ((addr32.eip & 0x00FF0000) >> 16);
                         reg32.ecx = (int)arr[/*ebp + temp.offset*/ 1].dword; // Adjusted needs checking moves y pos to ecx
                         addr32.pc += 3;
