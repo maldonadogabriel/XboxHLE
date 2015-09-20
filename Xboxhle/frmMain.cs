@@ -124,7 +124,8 @@ namespace xboxhle
                         // Delay Thread for 50 miliseconds
                         System.Threading.Thread.Sleep(50);
                     }
-                    else if (xboxhle.Properties.Settings.Default.isI386Active == false) {
+                    else if (xboxhle.Properties.Settings.Default.isI386Active == false) 
+                    {
                         // Disable progress reporting
                         bw.WorkerReportsProgress = false;
                         
