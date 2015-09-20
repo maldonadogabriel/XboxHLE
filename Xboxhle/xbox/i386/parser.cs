@@ -123,7 +123,7 @@ namespace xboxhle.xbox.i386
                         if (reg32.ebx == reg32.ecx)
                         {
                             // do something
-                            xbox.emu.emuIsRunning = false;
+                            xbox.emu.isRunning = false;
                         }
                         addr32.pc += 2;
                     }
@@ -131,7 +131,7 @@ namespace xboxhle.xbox.i386
                     {
                         if (reg32.ebx == reg32.ecx)
                         {
-                            xbox.emu.emuIsRunning = false;
+                            xbox.emu.isRunning = false;
                         }
                         addr32.pc += 2;
                     }
@@ -182,10 +182,10 @@ namespace xboxhle.xbox.i386
                     }
                     break;
                 case 0xEB:
-                    xbox.emu.emuIsRunning = false;
+                    xbox.emu.isRunning = false;
                     break;
                 default:
-                    xbox.emu.emuIsRunning = false;
+                    xbox.emu.isRunning = false;
                     break;
             }
 
@@ -388,7 +388,7 @@ namespace xboxhle.xbox.i386
                     }
                     break;
                 default:
-                    xbox.emu.emuIsRunning = false;
+                    xbox.emu.isRunning = false;
                     break;
             }
             return addr32.eip;

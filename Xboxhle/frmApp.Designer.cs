@@ -30,16 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem7 = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem8 = new System.Windows.Forms.MenuItem();
+            this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.menuItem6 = new System.Windows.Forms.MenuItem();
-            this.menuItem7 = new System.Windows.Forms.MenuItem();
-            this.menuItem8 = new System.Windows.Forms.MenuItem();
-            this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -48,6 +48,13 @@
             this.menuItem6,
             this.menuItem4,
             this.menuItem1});
+            // 
+            // menuItem6
+            // 
+            this.menuItem6.Enabled = false;
+            this.menuItem6.Index = 0;
+            this.menuItem6.Text = "File";
+            this.menuItem6.Visible = false;
             // 
             // menuItem4
             // 
@@ -59,11 +66,28 @@
             this.menuItem9});
             this.menuItem4.Text = "Log";
             // 
+            // menuItem7
+            // 
+            this.menuItem7.Enabled = false;
+            this.menuItem7.Index = 0;
+            this.menuItem7.Text = "Save...";
+            // 
             // menuItem5
             // 
             this.menuItem5.Index = 1;
             this.menuItem5.Text = "Clear";
             this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
+            // 
+            // menuItem8
+            // 
+            this.menuItem8.Index = 2;
+            this.menuItem8.Text = "-";
+            // 
+            // menuItem9
+            // 
+            this.menuItem9.Index = 3;
+            this.menuItem9.Text = "Quit";
+            this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
             // menuItem1
             // 
@@ -101,30 +125,6 @@
             this.textBox1.Size = new System.Drawing.Size(624, 421);
             this.textBox1.TabIndex = 0;
             this.textBox1.WordWrap = false;
-            // 
-            // menuItem6
-            // 
-            this.menuItem6.Enabled = false;
-            this.menuItem6.Index = 0;
-            this.menuItem6.Text = "File";
-            this.menuItem6.Visible = false;
-            // 
-            // menuItem7
-            // 
-            this.menuItem7.Enabled = false;
-            this.menuItem7.Index = 0;
-            this.menuItem7.Text = "Save...";
-            // 
-            // menuItem8
-            // 
-            this.menuItem8.Index = 2;
-            this.menuItem8.Text = "-";
-            // 
-            // menuItem9
-            // 
-            this.menuItem9.Index = 3;
-            this.menuItem9.Text = "Quit";
-            this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
             // frmApp
             // 

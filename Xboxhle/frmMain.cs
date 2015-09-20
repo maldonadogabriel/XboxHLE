@@ -113,7 +113,7 @@ namespace xboxhle
             // Initialize Thread
             if (!(bw.IsBusy))
             {
-                xbox.emu.emuIsRunning = true;
+                xbox.emu.isRunning = true;
                 bw.RunWorkerAsync();
             }
         }
@@ -122,38 +122,41 @@ namespace xboxhle
         {
             xboxhle.xbox.i386.parse.addr32.pc = xboxhle.xbe.SubtractOffset(xboxhle.xbe.entry_points, xboxhle.xbe.base_addr);
 
-            while (xbox.emu.emuIsRunning == true)
+            while (xbox.emu.isRunning == true)
             {
                 if (!(bw.CancellationPending == true))
                 {
-                    // Interpret and report instructions that are executed.
-                    int OpCode = xboxhle.xbox.emu.execute_x86();
-                    
-                    if (xboxhle.Properties.Settings.Default.isI386Active == true)
+                    if (xboxhle.xbox.emu.Pause == false)
                     {
-                        // Report Progress
-                        bw.WorkerReportsProgress = true;
-                        
-                        // Report executed instructions to the applications' profiler.
-                        bw.ReportProgress(OpCode);
+                        // Interpret and report instructions that are executed.
+                        int OpCode = xboxhle.xbox.emu.execute_x86();
 
-                        // Delay Thread for 50 miliseconds
-                        System.Threading.Thread.Sleep(50);
+                        if (xboxhle.Properties.Settings.Default.isI386Active == true)
+                        {
+                            // Report Progress
+                            bw.WorkerReportsProgress = true;
+
+                            // Report executed instructions to the applications' profiler.
+                            bw.ReportProgress(OpCode);
+
+                            // Delay Thread for 50 miliseconds
+                            System.Threading.Thread.Sleep(50);
+                        }
+                        else if (xboxhle.Properties.Settings.Default.isI386Active == false)
+                        {
+                            // Disable progress reporting
+                            bw.WorkerReportsProgress = false;
+
+                            // Delay Thread for 0 miliseconds
+                            System.Threading.Thread.Sleep(0);
+                        }
+
+                        // Cancel thread if emuIsRunning = False
+                        if (xbox.emu.isRunning == false) bw.CancelAsync();
+
+                        // Invalidate form once per-cycle.
+                        this.Invalidate();
                     }
-                    else if (xboxhle.Properties.Settings.Default.isI386Active == false) 
-                    {
-                        // Disable progress reporting
-                        bw.WorkerReportsProgress = false;
-                        
-                        // Delay Thread for 0 miliseconds
-                        System.Threading.Thread.Sleep(0);
-                    }
-
-                    // Cancel thread if emuIsRunning = False
-                    if (xbox.emu.emuIsRunning == false) bw.CancelAsync();
-
-                    // Invalidate form once per-cycle.
-                    this.Invalidate();   
                 }
                 else {
                     e.Cancel = true;
@@ -193,7 +196,7 @@ namespace xboxhle
 
         private void menuItem8_Click(object sender, EventArgs e)
         {
-            xbox.emu.emuIsRunning = false;
+            xbox.emu.isRunning = false;
         }
 
         private void menuItem11_Click(object sender, EventArgs e)

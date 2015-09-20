@@ -244,7 +244,7 @@ namespace xboxhle
                     }
                     break;
                 default:
-                    xbox.emu.emuIsRunning = false;
+                    xbox.emu.isRunning = false;
                     print(pc, eip, "Illegal Operation\r\nEmulation Halted");
                     break;
             }
