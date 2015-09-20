@@ -15,13 +15,13 @@ namespace xboxhle.xbox
 
         public static int execute_x86()
         {
-            if (xbox.emu.emuIsRunTime == true)
+            if (Pause == false)
             {
-                Execute = xboxhle.xbox.i386.llvm.jit(); // Included for structuring reasons, but very early for now.
-            }
-            else if (xbox.emu.emuIsRunTime == false)
-            {
-                if (Pause == false)
+                if (xbox.emu.emuIsRunTime == true)
+                {
+                    Execute = xboxhle.xbox.i386.llvm.jit(); // Included for structuring reasons, but very early for now.
+                }
+                else if (xbox.emu.emuIsRunTime == false)
                 {
                     Execute = xboxhle.xbox.i386.parse.translate(); // Execute translated instructions from our parser.
                     if (hReset == true) reset_x86();
