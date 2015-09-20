@@ -6,7 +6,7 @@ using System.Text;
 
 namespace xboxhle
 {
-    public class tables
+    public class table
     {
         static void i386_table(int index)
         {

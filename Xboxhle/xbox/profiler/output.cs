@@ -10,31 +10,19 @@ namespace xboxhle
 {
    static class output
     {
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
-        private const int WM_VSCROLL = 277;
-        private const int SB_PAGEBOTTOM = 7;
-
-        public static void ScrollToBottom()
-        {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
-            SendMessage(t.Handle, WM_VSCROLL, (IntPtr)SB_PAGEBOTTOM, IntPtr.Zero);
-        }
        public static void print(int pc, int eip, string mnemonic) 
        {
-           RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+           TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
            
            string str = "   " + (eip << 0).ToString("X") + "h";
            char padding = ' ';
            int eip_length = eip.ToString().Length;
            int length_adjust = eip_length + (25 - eip_length);
 
-           t.AppendText(xboxhle.xbe.getSectionName(pc) + ":" + pc.ToString("X8"), Color.DarkSlateBlue, Color.Transparent);
-           t.AppendText(str.PadRight(length_adjust, padding), Color.DarkSlateGray, Color.Transparent);
-           t.AppendText(mnemonic + "\n", Color.MediumBlue, Color.Transparent);
-           t.SelectionStart = t.Text.Length;
-           ScrollToBottom();
+           t.AppendText(xboxhle.xbe.getSectionName(pc) + ":" + pc.ToString("X8"));
+           t.AppendText(str.PadRight(length_adjust, padding));
+           t.AppendText(mnemonic + "\n");
+           //t.SelectionStart = t.Text.Length;
        }
 
        public static void pXbe()
@@ -101,16 +89,16 @@ namespace xboxhle
                     print(pc, eip, "Push dword " + ((eip & 0x0000FF00) >> 8).ToString("X") + "h");
                     break;
                 case 0x75:
-                    print(pc, eip, "jnz loc_" + xboxhle.i386.reg32_pc.ToString("X") + "h");
+                    print(pc, eip, "jnz loc_" + xboxhle.xbox.i386.parse.addr32.pc.ToString("X") + "h");
                     break;
                 case 0x7C: // new
                     if (((eip & 0x0000FF00) >> 8) == 0xF5) // new
                     {
-                        print(pc, eip, "jl short loc_" + xboxhle.i386.reg32_pc.ToString("X") + "h");
+                        print(pc, eip, "jl short loc_" + xboxhle.xbox.i386.parse.addr32.pc.ToString("X") + "h");
                     }
                     else if (((eip & 0x0000FF00) >> 8) == 0xFC) // new
                     {
-                        print(pc, eip, "jl short loc_" + xboxhle.i386.reg32_pc.ToString("X") + "h");
+                        print(pc, eip, "jl short loc_" + xboxhle.xbox.i386.parse.addr32.pc.ToString("X") + "h");
                     }
                     break;
                 case 0x81:
@@ -208,15 +196,18 @@ namespace xboxhle
                     print(pc, eip, "mov byte ptr [ebx+" + ((eip & 0x00FF0000) >> 16).ToString("X") + "], " + ((eip & 0xFF000000) >> 24).ToString("X") + "h");
                     break;
                 case 0xE8:
-                    print(pc, eip, "call sub_" + xboxhle.i386.reg32_pc.ToString("X"));
+                    print(pc, eip, "call sub_" + xboxhle.xbox.i386.parse.addr32.pc.ToString("X"));
                     break;
                 case 0xE9:
-                    print(pc, eip, "jmp loc_" + xboxhle.i386.reg32_pc.ToString("X"));
+                    print(pc, eip, "jmp loc_" + xboxhle.xbox.i386.parse.addr32.pc.ToString("X"));
                     break;
                 case 0xEB:
                     if ((((eip & 0x0000FF00) >> 8)) == 0x58)
                     {
-                        print(pc, eip, "jmp short loc_" + xboxhle.i386.reg32_pc.ToString("X"));
+                        print(pc, eip, "jmp short loc_" + xboxhle.xbox.i386.parse.addr32.pc.ToString("X"));
+                    } else if ((((eip & 0x0000FF00) >> 8)) == 0xFE)
+                    {
+                        print(pc, eip, "jmp short loc_" + xboxhle.xbox.i386.parse.addr32.pc.ToString("X"));
                     }
                     break;
                 case 0xED:
@@ -228,7 +219,7 @@ namespace xboxhle
                 case 0xFF:
                     if ((((eip & 0x0000FF00) >> 8)) == 0x15)
                     {
-                        print(pc, eip, "call [" + xboxhle.tables.kernel_Thunk_table(xboxhle.i386.seg16_ds) + "]");
+                        print(pc, eip, "call [" + xboxhle.table.kernel_Thunk_table(xboxhle.xbox.i386.parse.seg16.ds) + "]");
                     }
                     else if ((((eip & 0x0000FF00) >> 8)) == 0x35)
                     {
@@ -236,7 +227,7 @@ namespace xboxhle
                     }
                     break;
                 default:
-                    frmMain.emuIsRunning = false;
+                    xbox.emu.emuIsRunning = false;
                     print(pc, eip, "Illegal Operation\r\nEmulation Halted");
                     break;
             }

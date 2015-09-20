@@ -22,5 +22,29 @@ namespace xboxhle.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool isXBEActive {
+            get {
+                return ((bool)(this["isXBEActive"]));
+            }
+            set {
+                this["isXBEActive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isI386Active {
+            get {
+                return ((bool)(this["isI386Active"]));
+            }
+            set {
+                this["isI386Active"] = value;
+            }
+        }
     }
 }

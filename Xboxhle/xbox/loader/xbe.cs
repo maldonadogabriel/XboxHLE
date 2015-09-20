@@ -116,7 +116,7 @@ namespace xboxhle
 
         public static void FetchAllowedMedia(uint t_offset)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
 
             switch (t_offset)
             {
@@ -6134,7 +6134,7 @@ namespace xboxhle
         }
         static string[] game_rating_table = new string[0x7] {" (GAME_RATING_RATED_PENDING)"," (GAME_RATING_ADULTS_ONLY)"," (GAME_RATING_MATURE)"," (GAME_RATING_TEEN)"," (GAME_RATING_EVERYONE)"," (GAME_RATING_KIDS_TO_ADULTS)"," (GAME_RATING_EARLY_CHILDHOOD)" };
         public static void FetchGameRating(uint Addr){
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             if (Addr.ToString("X8") != null)
             {
                 try
@@ -6153,7 +6153,7 @@ namespace xboxhle
 
         public static void FetchGameRegion(uint t_offset)
         {
-                RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+                TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
                 switch (t_offset)
                 {
                     case 0x00000000:
@@ -6210,7 +6210,7 @@ namespace xboxhle
         static string[] init_flags_table = new string[0xF] {" (MountUtilityDrive)", " (FormatUtilityDrive)"," (MountUtilityDrive)  (FormatUtilityDrive)"," (Limit64Megabytes)"," (MountUtilityDrive)  (Limit64Megabytes)","  (FormatUtilityDrive)  (Limit64Megabytes)","(MountUtilityDrive)  (FormatUtilityDrive)  (Limit64Megabytes)" ," (DontSetupHarddisk)" ," (MountUtilityDrive)  (DontSetupHarddisk)","  (FormatUtilityDrive)  (DontSetupHarddisk)","(MountUtilityDrive)   (FormatUtilityDrive)  (DontSetupHarddisk)", " (Limit64Megabytes)  (DontSetupHarddisk)","(MountUtilityDrive)  (Limit64Megabytes)  (DontSetupHarddisk)","(FormatUtilityDrive)  (Limit64Megabytes)  (DontSetupHarddisk)","(MountUtilityDrive)  (FormatUtilityDrive)  (Limit64Megabytes)  (DontSetupHarddisk)"};
         public static void FetchInitFlags(int t_offset)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             try {
                 t.AppendText(init_flags_table[Convert.ToInt32(t_offset.ToString("X8")) - 1]);
             } catch (Exception){
@@ -6220,7 +6220,7 @@ namespace xboxhle
       
         public static string FetchImageHeaderOffset(long t_offset, int t_size, int type)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             byte[] addr = new byte[t_size];
             char[] addrChar = new char[0x1000];
             string buffer = null;
@@ -6297,7 +6297,7 @@ namespace xboxhle
 
         public static void FetchSectionOffset(int t_offset, int t_size)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             for (int j = 0; j < Convert.ToInt32(num_sections, 16); j++)
             {
                 sect_flags[j] = Convert.ToInt32(FetchImageHeaderOffset(offset, 0x0004, 0), 16);
@@ -6377,7 +6377,7 @@ namespace xboxhle
 
         public static int FetchEntryPoint(int t_offset)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             if (t_offset.ToString("X").Remove(2) == "94")
             {
                 offset = XorOffset(entry_points, Convert.ToString(XOR_ENTRY_DEBUG));
@@ -6392,7 +6392,7 @@ namespace xboxhle
         }
         public static void FetchKernelThunk(int t_offset)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             if (t_offset.ToString("X").Remove(2) == "EF")
             {
                 offset = XorOffset(kernel_thunk_addr, XOR_KERNEL_DEBUG);
@@ -6406,7 +6406,7 @@ namespace xboxhle
         } 
         public static void FetchTLSAddr(int t_offset)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             t.AppendText(" (0x" + offset.ToString("X8") + ")" + "\r\n");
 
             for (int k = 0; k < Convert.ToInt32(tls_addr, 16); k++)
@@ -6464,7 +6464,7 @@ namespace xboxhle
         }
         public static string MajorMinorBuildVersionAddress(int t_offset, int t_size)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             byte[] addr = new byte[t_size];
             char[] addrChar = new char[t_size];
             string buffer = null;
@@ -6495,7 +6495,7 @@ namespace xboxhle
 
         public static void FetchKernelLibraryVersion(int t_offset)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             string buffer = null;
             int w = 0;
             for (int j = 0; j < Convert.ToInt32(num_lib_versions, 16); j++)
@@ -6565,7 +6565,7 @@ namespace xboxhle
         }
         public static void FetchLibraryVersion(int t_offset) 
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             string buffer = null;
             for (int j = 0; j < Convert.ToInt32(num_lib_versions, 16); j++)
             {
@@ -6596,7 +6596,7 @@ namespace xboxhle
 
         public static void FetchXAPIVersion(int t_offset)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             string buffer = null;
             for (int j = 0; j < 1; j++)
             {
@@ -6626,7 +6626,7 @@ namespace xboxhle
         }
         public static void FetchDateTime(int t_offset)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0);
             dt = dt.AddSeconds(t_offset);
             dt = dt.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(dt).Hours);
@@ -6635,7 +6635,7 @@ namespace xboxhle
 
         public static void filesize_pXbe(long fsize)
         {
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             decimal File_Length_Result;
             const decimal _Byte = 8;
             const decimal _Kilobyte = 1024;
@@ -6692,7 +6692,7 @@ namespace xboxhle
             //Used for Error Checking.
             try
             {
-                RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+                TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
                 //We check to see if the buffer matches with our Constant Magic number, if it does then we proceed with dumping the contents of our XBE File.
                 if (magic_num == Convert.ToString(_magic_num.ToString("X8")))
                 {
@@ -7003,7 +7003,7 @@ namespace xboxhle
             }
             catch (Exception)
             {
-                RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+                TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
                 t.AppendText("Error Occurred at Offset: 0x" + offset.ToString("X") + "\r\n");
                 offset = 0x0;
                 pXbe.Close(); 

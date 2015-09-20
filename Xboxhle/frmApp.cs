@@ -15,54 +15,58 @@ namespace xboxhle
 {
     public partial class frmApp : Form
     {
-
         public frmApp()
         {
             InitializeComponent();
         }
 
-        public string ThisText
-        {
-            get
-            {
-                return this.Text;
-            }
-            set
-            {
-                this.Text = value;
-            }
-        }
-
         private void frmApp_Load(object sender, EventArgs e)
         {
             this.Text = Application.ProductName + " Application Log";
-            int interval = 0;
-            frmMain MainFrm = new frmMain();
-            while (this.Visible == true)
-            {
-                if (interval == 1)
-                {
-                    if (this.Visible == true)
-                    {
-                        MainFrm.Show();
-                        break;
-                    }
-                }
-                interval++;
-            }
             
+            // Retrieves saved bit for verifying the state of our sources in the application log. 
+            //menuItem2.Checked = xboxhle.Properties.Settings.Default.isXBEActive; // For legacy code reasons, this must be disabled. Until some rewrites are met for the xbe loader.
+            menuItem3.Checked = xboxhle.Properties.Settings.Default.isI386Active;           
         }
-    }
-    public static class RichTextBoxExtensions
-    {
-        public static void AppendText(this RichTextBox box, string text, Color fcolor, Color bcolor)
+
+        private void menuItem2_Click(object sender, EventArgs e)
         {
-            box.SelectionStart = box.TextLength;
-            box.SelectionLength = 0;
-            box.SelectionColor = fcolor;
-            box.SelectionBackColor = bcolor;
-            
-            box.AppendText(text);
+            if (menuItem2.Checked == true)
+            {
+                menuItem2.Checked = false;
+                xboxhle.Properties.Settings.Default.isXBEActive = false;
+            }
+            else if (menuItem2.Checked == false)
+            {
+                menuItem2.Checked = true;
+                xboxhle.Properties.Settings.Default.isXBEActive = true;
+            }
+            xboxhle.Properties.Settings.Default.Save();
+        }
+
+        private void menuItem3_Click(object sender, EventArgs e)
+        {
+            if (menuItem3.Checked == true)
+            {
+                menuItem3.Checked = false;
+                xboxhle.Properties.Settings.Default.isI386Active = false;
+            }
+            else if (menuItem3.Checked == false)
+            {
+                menuItem3.Checked = true;
+                xboxhle.Properties.Settings.Default.isI386Active = true;
+            }
+            xboxhle.Properties.Settings.Default.Save();
+        }
+
+        private void menuItem5_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+        }
+
+        private void menuItem9_Click(object sender, EventArgs e)
+        {
+            Application.OpenForms["frmMain"].Close();
         }
     }
 }

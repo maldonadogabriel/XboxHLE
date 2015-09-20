@@ -8,7 +8,6 @@ using System.Data;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,8 +16,6 @@ namespace xboxhle
 {
     public partial class frmMain : Form
     {
-        public static bool emuIsRunning = false;
-
         public frmMain()
         {
             InitializeComponent();
@@ -34,6 +31,20 @@ namespace xboxhle
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = Application.ProductName;
+            int interval = 0;
+            frmApp AppFrm = new frmApp();
+            while (this.Visible == true)
+            {
+                if (interval == 10000000)
+                {
+                    if (this.Visible == true)
+                    {
+                        AppFrm.Show();
+                        break;
+                    }
+                }
+                interval++;
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -42,8 +53,8 @@ namespace xboxhle
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             Graphics displayGraphics = e.Graphics;
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            xboxhle.video.vmem_read(e);
-            xboxhle.video.debugInfo(e);
+            xboxhle.xbox.video.video.frameBuffer_Draw(e);
+            xboxhle.xbox.video.video.debugInfo(e);
         }
 
         private void menuItem2_Click(object sender, EventArgs e)
@@ -58,16 +69,17 @@ namespace xboxhle
         {
             this.Close();
         }
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+
+        private  void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             // Load Xbox Executable File
             xboxhle.xbe.load_pXbe(openFileDialog1.FileName);
             
             // Print Xbox Executable Header
             //xboxhle.output.pXbe();
-            xboxhle.xbe.print_pXbe();
+            if (xboxhle.Properties.Settings.Default.isXBEActive == true) xboxhle.xbe.print_pXbe();
 
-            RichTextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as RichTextBox;
+            TextBox t = Application.OpenForms["frmApp"].Controls["textBox1"] as TextBox;
             
             if (!(xboxhle.xbe.cert_title_name == null))
             {
@@ -85,33 +97,46 @@ namespace xboxhle
             // Initialize Thread
             if (!(bw.IsBusy))
             {
-                emuIsRunning = true;
+                xbox.emu.emuIsRunning = true;
                 bw.RunWorkerAsync();
             }
         }
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            xboxhle.i386.reg32_pc = xboxhle.xbe.SubtractOffset(xboxhle.xbe.entry_points, xboxhle.xbe.base_addr);
+            xboxhle.xbox.i386.parse.addr32.pc = xboxhle.xbe.SubtractOffset(xboxhle.xbe.entry_points, xboxhle.xbe.base_addr);
 
-            while (emuIsRunning == true)
+            while (xbox.emu.emuIsRunning == true)
             {
                 if (!(bw.CancellationPending == true))
                 {
                     // Interpret and report instructions that are executed.
-                    int OpCode = xboxhle.i386.x86();
+                    int OpCode = xboxhle.xbox.emu.execute_x86();
                     
-                    // Report executed instructions to the applications' profiler.
-                    //bw.ReportProgress(OpCode);
+                    if (xboxhle.Properties.Settings.Default.isI386Active == true)
+                    {
+                        // Report Progress
+                        bw.WorkerReportsProgress = true;
+                        
+                        // Report executed instructions to the applications' profiler.
+                        bw.ReportProgress(OpCode);
+
+                        // Delay Thread for 50 miliseconds
+                        System.Threading.Thread.Sleep(50);
+                    }
+                    else if (xboxhle.Properties.Settings.Default.isI386Active == false) {
+                        // Disable progress reporting
+                        bw.WorkerReportsProgress = false;
+                        
+                        // Delay Thread for 0 miliseconds
+                        System.Threading.Thread.Sleep(0);
+                    }
 
                     // Cancel thread if emuIsRunning = False
-                    if (emuIsRunning == false) bw.CancelAsync();
+                    if (xbox.emu.emuIsRunning == false) bw.CancelAsync();
 
                     // Invalidate form once per-cycle.
-                    this.Invalidate();
-
-                    // Delay Thread for 100 miliseconds
-                    System.Threading.Thread.Sleep(100);
+                    this.Invalidate();   
                 }
                 else {
                     e.Cancel = true;
@@ -123,13 +148,46 @@ namespace xboxhle
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e) 
         {
             // Send API Logging to Application log.
-            xboxhle.output.x86(xboxhle.i386.reg32_pc, xboxhle.i386.reg32_eip);
+            xboxhle.output.x86(xboxhle.xbox.i386.parse.addr32.pc, xboxhle.xbox.i386.parse.addr32.eip);
         }
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) 
-        {
-            
+        {          
             this.Text = Application.ProductName;
+            xboxhle.xbox.emu.reset_x86();
+            this.Invalidate();
+        }
+
+        private void menuItem6_Click(object sender, EventArgs e)
+        {
+            if (xboxhle.xbox.emu.Pause == true) {
+                xboxhle.xbox.emu.Pause = false;
+                menuItem6.Checked = false;
+            } else if (xboxhle.xbox.emu.Pause == false) {
+                xboxhle.xbox.emu.Pause = true;
+                menuItem6.Checked = true;
+            }
+        }
+
+        private void menuItem7_Click(object sender, EventArgs e)
+        {
+            xboxhle.xbox.emu.hReset = true;
+        }
+
+        private void menuItem8_Click(object sender, EventArgs e)
+        {
+            xbox.emu.emuIsRunning = false;
+        }
+
+        private void menuItem11_Click(object sender, EventArgs e)
+        {
+            //frmAbout AboutFrm = new frmAbout();
+            //AboutFrm.ShowDialog();
+        }
+
+        private void menuItem10_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://github.com/Gabriel-Maldonado/XboxHLE");
         }   
     }
 }
