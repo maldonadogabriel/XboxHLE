@@ -309,7 +309,6 @@ namespace xboxhle.xbox.i386
                     }
                     break;
                 case 0x5D: // pop ebp
-                    
                     addr32.pc += 1;
                     break;
                 case 0xC2: // retn
