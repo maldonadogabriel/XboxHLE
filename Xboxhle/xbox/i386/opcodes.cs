@@ -1,3 +1,7 @@
+// © Copyright 2015  Gabriel Maldonado.  All Rights Reserved.
+// Linkedin: https://www.linkedin.com/pub/gabriel-maldonado/63/457/866
+// Github: https://github.com/Gabriel-Maldonado/XboxHLE
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
