@@ -68,9 +68,14 @@ namespace xboxhle.xbox.i386
             public static Int32 ebp, esp;
         }
 
+        public struct flag 
+        {
+            public static Int32 carry, parity, aux, zero, sign, trap, interrupt_enabled, direction, io_privledge, nested_task;
+        }
+
         public struct eFlag 
         { 
-            public static Int32 carry, parity, aux, zero, sign, trap, interrupt_enabled, direction, io_privledge, nested_task, resume, virtual_8086, alignment_check, virtual_interrupt, virtual_interrupt_pending, id;
+            public static Int32 resume, virtual_8086, alignment_check, virtual_interrupt, virtual_interrupt_pending, id;
         }
 
         public static stack[] arr = new stack[0x00FFFFFF];
