@@ -195,8 +195,8 @@ namespace xboxhle.xbox.i386
 
         public static int nonxdk_drawPixel_demo()
         {
-            addr32.op2 = ((xboxhle.xbe.mem[addr32.pc + 3] << 8) | (xboxhle.xbe.mem[addr32.pc + 2] >> 0));
-            addr32.op1 = ((xboxhle.xbe.mem[addr32.pc + 1] << 8) | (xboxhle.xbe.mem[addr32.pc + 0] >> 0));
+            addr32.op2 = ((xboxhle.xbe.mem[addr32.pc + 3] << 8) | (xboxhle.xbe.mem[addr32.pc + 2] << 0));
+            addr32.op1 = ((xboxhle.xbe.mem[addr32.pc + 1] << 8) | (xboxhle.xbe.mem[addr32.pc + 0] << 0));
 
             addr32.eip = ((addr32.op2 << 16) | (addr32.op1 << 0));
 
