@@ -8,6 +8,6 @@ Pull requests are welcome but not all may be accepted. The code base is still in
 If you paid for this software or recieved it as part of a bundle following payment, you have been scammed and should demand your money back immediately. XboxHLE is purely developed for learning purposes only and can be used freely as a learning instrument, it should not be used for enabling illegal or malicious activities.
 
 # Sample videos
-[![emulated samples](https://img.youtube.com/watch?v=rar8sebBEK4/0.jpg)](https://www.youtube.com/watch?v=rar8sebBEK4)
+[![Emulated samples](https://img.youtube.com/watch?v=rar8sebBEK4/0.jpg)](https://www.youtube.com/watch?v=rar8sebBEK4)
 
-[![emulated samples](https://img.youtube.com/watch?v=fDof62hWIto/0.jpg)](https://www.youtube.com/watch?v=fDof62hWIto)
+[![Fade samples](https://img.youtube.com/watch?v=fDof62hWIto/0.jpg)](https://www.youtube.com/watch?v=fDof62hWIto)
